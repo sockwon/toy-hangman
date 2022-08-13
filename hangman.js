@@ -40,26 +40,30 @@ const showProblem =()=>{
     indexProblem.innerText = problemInPage.join(" ");
 }
 
-const setScore=()=>{
-    sessionStorage.setItem("score" , life);
-}
-const getScore=()=>{
-    sessionStorage.getItem('score');
+const setScore=(value)=>{
+    return sessionStorage.setItem("score" , String(value));
 }
 
+const getScore=()=>{
+    return sessionStorage.getItem('score');
+}
+
+
 showProblem();
+
 showLife(life);
 
 const userInput = document.getElementById("userInput");
 const answer = problem.split("");
 
-if(getScore){
+if(getScore()){
     score.innerText = `SCORE : ${getScore()}`;
 }else{
     score.innerText = `SCORE : ${null}`;
 }
 
 console.log(answer, getScore());
+
 const compare=()=>{
 
     if(life <= 0) return;
@@ -78,8 +82,8 @@ const compare=()=>{
     if(!problemInPage.includes("_")){
         gameOver.innerText = "YOU WIN"
         life += Number(getScore());
+        setScore(life);
         score.innerText = `SCORE : ${getScore()}`;
-        setScore();
         return;
     }
 
