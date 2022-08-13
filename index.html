@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main>
+        <h1 >HANGMAN</h1> 
+        <span id="score"></span>
+        <p id="problem">문제는 여기에</p>
+        <div>
+          <p id="life"></p>
+          <input id="userInput" type="text" 
+          placeholder="answer one character" 
+          maxlength="1"
+          onchange="compare()" />
+        </div>
+        <div>
+          <input type="button" value="Search Dictionary" onclick="searchDict()">
+          <p id="hint"></p>
+          <span id="gameOver"></span>
+        </div>
+        <p></p>
+    </main>
+	<script src="hangman.js"></script>
+  </body>
+</html>
