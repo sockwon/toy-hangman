@@ -1,24 +1,23 @@
 "use strict";
-const dictAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 const problemSet = [
-    'people',  'because', 'through', 'should',  'school',  'become',
-    'between', 'really',  'another', 'family',  'student', 'country',
-    'problem', 'against', 'company', 'system',  'program', 'during',
-    'number',  'always',  'believe', 'happen',  'without', 'before',
-    'million', 'mother',  'though',  'little',  'provide', 'service',
-    'around',  'friend',  'father',  'however', 'member',  'almost',
-    'include', 'change',  'minute',  'several', 'nothing', 'social',
-    'whether', 'follow',  'parent',  'create',  'public',  'already',
-    'others',  'office',  'health',  'person',  'history', 'within',
-    'result',  'morning', 'reason',  'moment',  'himself', 'teacher',
-    'enough',  'across',  'second',  'toward',  'policy',  'process',
-    'appear',  'market',  'expect',  'nation',  'college', 'course',
-    'someone', 'behind',  'remain',  'effect',  'suggest', 'control',
-    'perhaps', 'former',  'require', 'report',  'better',  'effort',
-    'decide',  'strong',  'leader',  'police',  'finally', 'return',
-    'explain', 'develop', 'federal', 'receive', 'action',  'season',
-    'society', 'player',  'record',  'special'
-            ]
+        'their',    'would',    'about',   'there',     'think',     'which',
+        'people',   'could',    'other',   'these',     'first',     'because',
+        'thing',    'those',    'woman',   'through',   'child',     'after',
+        'should',   'world',    'school',  'still',     'three',     'state',
+        'never',    'become',   'between', 'really',    'something', 'another',
+        'family',   'leave',    'while',   'student',   'great',     'group',
+        'begin',    'country',  'where',   'problem',   'every',     'start',
+        'might',    'American', 'against', 'place',     'again',     'company',
+        'system',   'right',    'program', 'question',  'during',    'small',
+        'number',   'always',   'night',   'point',     'believe',   'today',
+        'bring',    'happen',   'without', 'before',    'large',     'million',
+        'under',    'water',    'write',   'mother',    'national',  'money',
+        'story',    'young',    'month',   'different', 'study',     'though',
+        'business', 'issue',    'black',   'little',    'house',     'since',
+        'provide',  'service',  'around',  'friend',    'important', 'father',
+        'until',    'power',    'often',   'political', 'among',     'stand',
+        'however',  'member',   'almost',  'include'
+        ]
 
 const problemSetLength = problemSet.length
 const number = Math.floor((Math.random()*problemSetLength));
@@ -31,6 +30,7 @@ const indexLife = document.getElementById("life");
 const hint = document.getElementById("hint");
 const gameOver = document.getElementById("gameOver");
 const score = document.getElementById("score");
+let word = problem;
 
 const showLife =(alife)=>{
     indexLife.innerText = alife;
@@ -48,6 +48,17 @@ const getScore=()=>{
     return sessionStorage.getItem('score');
 }
 
+const searchDict =()=>{
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    .then((res)=>res.json())
+    .then((data)=> {
+        let str="";
+        const temp = data[0].meanings[0].definitions
+        const abc = temp.map((e)=>`${str+"\n"+e.definition}`)
+        hint.innerText = abc
+        return 
+    })
+}
 
 showProblem();
 
@@ -93,15 +104,3 @@ const compare=()=>{
     }
 
 }
-
-let word = problem;
-const searchDict = ()=>{
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-    .then((res)=>res.json())
-    .then((data)=> {
-        const temp = (data[0].meanings[0].definitions[0].definition)
-        hint.innerText = temp;
-    })
-}
-
-
