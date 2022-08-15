@@ -1,8 +1,9 @@
 const userService = require("../services/userService");
 
-const signUp = (req, res) => {
+const signUp = async (req, res) => {
     try {
-      const {email, password} = req.body
+      const {email, password} = await req.body
+      console.log(req.body,1000000000000)
       if ( !email || !password ) {
         return res.status(400).json({ message: 'KEY_ERROR' });
       }
